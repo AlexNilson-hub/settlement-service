@@ -6,6 +6,8 @@
     "skipLibCheck": true,
     "strict": true,
 
+    "typeRoots": ["./typings", "./vendor/types"], //Добавил для auth-next
+
     "noImplicitAny": false, //убрал enu
 
     "forceConsistentCasingInFileNames": true,

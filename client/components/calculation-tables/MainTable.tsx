@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from "@mui/material/Typography";
 import InputComplete from "../product-table/InputComplete";
+import {useEffect, useState} from 'react';
 
 
 
@@ -23,7 +24,7 @@ const bull = (
     </Box>
 );
 
-const MainTable = () => {
+const MainTable = ({props}) => {
     // const [todos, setTodos] = useState([])
     // const [page, setPage] = useState(1)
     // const limit = 1
@@ -41,6 +42,7 @@ const MainTable = () => {
     // const titles = useSelector((state: RootState) => state.products.titles)
     // const todos = useSelector((state: RootState) => state.products.todos)
 
+    // @ts-ignore
     return (
         <Box sx={{flexGrow: 1, mx: 'auto', p: 1, m: 1,}} >
             <Grid container rowSpacing={2}>

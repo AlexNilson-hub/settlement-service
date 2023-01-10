@@ -1,19 +1,17 @@
 import type {PropsWithChildren} from 'react'
 import Navbar from "../components/Navbar";
-import {Box, Container} from "@mui/material";
+import Box from "@mui/material/Box";
 
 
 const MainLayout = ({children}: PropsWithChildren) => {
     return (
         <>
             <Navbar/>
-            <div>
-                <Box/>
+            <Box>
                 {children}
-            </div>
+            </Box>
         </>
     )
 }
-
 
 export default MainLayout;

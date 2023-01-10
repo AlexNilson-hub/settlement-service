@@ -22,13 +22,17 @@ import {
     AParameters17,
 }
     from "../../array-data/ArrayData"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button, Stack} from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Item from "@mui/material/Grid";
 import ProductList from "../calculation-tables/ProductList";
 import {useRouter} from "next/router";
+import {useSelector, useDispatch} from "react-redux";
+import {RootState} from "../../store";
+import {getProducts} from "../../store/storeSlice/productsSlice";
+import GetUser from "../../components/product-table/GetUser"
 
 // Поставить данные с сервера бд вместо массива
 // const parametersOptions = AParameters.map((val, index) => ({
@@ -44,10 +48,65 @@ import {useRouter} from "next/router";
 //     let value2 = value2;
 //     let value = value2 + value3
 // }
+// export const getServerSideProps = async (ctx) => {
+//
+//     // ctx is the context object which contains the request,
+//     // response and props passed to the page.
+//
+//     // fetching data from jsonplaceholder.
+//     const res = await fetch(
+//         'https://jsonplaceholder.typicode.com/posts');
+//     let allPosts = await res.json();
+//
+//     // Sending fetched data to the page component via props.
+//     return {
+//         props: {
+//             allPosts: allPosts.map((post) => post.title)
+//         }
+//     }
+// }
 
-const InputComplete = () => {
+const InputComplete = ({users}) => {
     const router = useRouter()
-    const [value, setValue] = useState<string | null>(AParameters[''])
+    // const {product, loading} = useSelector((state: RootState ) => state.products)
+    // const dispatch = useDispatch()
+    // useEffect(() => {
+    //     // @ts-ignore
+    //     dispatch(getProducts())
+    //     console.log(dispatch)
+    // },[])
+
+    // @ts-ignore
+    // const [value, setValue] = useState([])
+    // const [hasError, setHasError] = useState(false)
+    // useEffect(() => {
+    //     fetch("http://rvi.17bit.online:31700/api/types?&json_indent=4&bytarget=unf_product_t&title=1")
+    //         .then(response => response.json())
+    //         .then(res => setValue(res))
+    //     return ({!!value.ok && value.map(res => {
+    //         return(
+    //             <div key={}>
+    //
+    //             </div>
+    //         )
+    //     }
+    //     )}
+    //
+    //     )
+    //
+    //         }, [])
+        // if (props) {
+        //     props = JSON.parse(props)
+        //     props.forEach(i =>
+        //     return result.push(data[key]);
+        //
+        //         })
+        //     )
+        // }
+
+            // .then(res => setValue(res))
+            // .catch(error => setHasError(true))
+
     const [value2, setValue2] = useState<string | null>(AParameters2[''])
     const [value3, setValue3] = useState<number | null>(AParameters3[''])
     const [value4, setValue4] = useState<string | null>(AParameters4[''])
@@ -69,7 +128,7 @@ const InputComplete = () => {
 
     // const [params, setParams] = useState<IParameters | null>(AParameters[''])
 
-    const onChange = (event: any, newValue: string | null) => setValue(newValue)
+    // const onChange = (event: any, newValue: []) => setValue(newValue)
     const onChange2 = (event: any, newValue2: string | null) => setValue2(newValue2)
     const onChange3 = (event: any, newValue3: number | null) => setValue3(newValue3)
     const onChange4 = (event: any, newValue4: string | null) => setValue4(newValue4)
@@ -105,7 +164,6 @@ const InputComplete = () => {
     // }
 
 
-
     // const onChangeOptions = (event: any, newValue: IParameters | null) => setParams(newValue)
     // Поставить данные с сервера бд вместо массива
     // useEffect(() =>
@@ -113,26 +171,58 @@ const InputComplete = () => {
     //         .then((response) => response.json())
     //         .then((data) => setData(data));
     // )
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         const response = await fetch(`http://rvi.17bit.online:31700/api/types?&json_indent=4&bytarget=unf_product_t&title=1`)
+    //         const data = await response.json()
+    //         setValue(data)
+    //     }
+    //     getData()
+    // }, [])
 
 
     // @ts-ignore
-    return (<Box sx={{flexGrow: 1}}>
+    // @ts-ignore
+    return (<>
+        <Box sx={{flexGrow: 1}}>
             <Grid container rowSpacing={2}>
-                <Grid item xs={4}>
-                    <Item>
-                        <Stack spacing={2} mt={2}>
-                            <Autocomplete
-                                disablePortal
-                                id="combo-box-demo"
-                                value={value}
-                                onChange={onChange}
-                                options={AParameters}
-                                sx={{width: 300}}
-                                renderInput={(params) => <TextField {...params} label="Выбор типа изделия"/>}
-                            />
-                        </Stack>
-                    </Item>
-                </Grid>
+                    <Grid item xs={4}>
+                        <Item>
+                            {/*<GetUser />*/}
+                            <h1>All Posts</h1>
+                            {/*<table>*/}
+                            {/*    <tr>*/}
+                            {/*        <th className='topnav'>Rendered By Next JS | Server side rendered</th>*/}
+                            {/*    </tr>*/}
+                            {/*    {props?.map((user, index) => (*/}
+                            {/*        <tr>*/}
+                            {/*            <td>{user.name}</td>*/}
+                            {/*            <td>{user.username}</td>*/}
+                            {/*            <td>{user.email}</td>*/}
+                            {/*        </tr>*/}
+                            {/*    ))}*/}
+                            {/*</table>*/}
+                            {/*{props.map(product =>*/}
+                            {/*    <div>*/}
+                            {/*        {product.title}*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
+                            {/*{props.map((post, idx) => (*/}
+                            {/*    <div key={idx} >{post.title}</div>))}*/}
+                            {/*<Stack spacing={2} mt={2}>*/}
+                            {/*    <Autocomplete*/}
+                            {/*        disablePortal*/}
+                            {/*        id="combo-box-demo"*/}
+                            {/*        value={value}*/}
+                            {/*        onChange={onChange}*/}
+                            {/*        options={AParameters}*/}
+                            {/*        sx={{width: 300}}*/}
+                            {/*        renderInput={(params) =>*/}
+                            {/*            <TextField {...params} label="Выбор типа изделия"/>}*/}
+                            {/*    />*/}
+                            {/*</Stack>*/}
+                        </Item>
+                    </Grid>
                 <Grid item xs={4}>
                     <Stack spacing={2} mt={2}>
                         <Autocomplete
@@ -166,7 +256,7 @@ const InputComplete = () => {
                 </Grid>
                 <Grid item xs={4}>
                     <Stack spacing={2} mt={2}>
-                        <ProductList />
+                        <ProductList/>
                     </Stack>
                 </Grid>
                 <Grid item xs={4}>
@@ -292,7 +382,7 @@ const InputComplete = () => {
                             sx={{width: 300}}
                             renderInput={(params) => <TextField {...params} label="Конец 3"/>}
                         />
-                        <Grid xs={8} >
+                        <Grid xs={8}>
                             <Button variant='contained' onClick={() => router.push('/user-profile')}>
                                 Расчитать изделие
                             </Button>
@@ -312,7 +402,7 @@ const InputComplete = () => {
                 {/*/>*/}
                 <Grid item xs={4}>
                     <Stack spacing={2} mt={2} sx={{textAlign: 'left'}}>
-                        <div>{`Выбор типа изделия: ${value !== null ? `${value}` : 'null'}`}</div>
+                        {/*<div>{`Выбор типа изделия: ${value !== null ? `${value}` : 'null'}`}</div>*/}
                         <div>{`Тип стали: ${value2 !== null ? `${value2}` : 'null'}`}</div>
                         <div>{`Толщина стали: ${value3 !== null ? `${value3}` : 'null'}`}</div>
                         <div>{`Вид проката: ${value4 !== null ? `${value4}` : 'null'}`}</div>
@@ -334,8 +424,53 @@ const InputComplete = () => {
                     </Stack>
                 </Grid>
             </Grid>
-        </Box>
+        </Box></>
     );
 }
 
+// export async function getServerSideProps({params,req,res,query,preview,previewData,resolvedUrl,locale,locales,defaultLocale}) {
+//     console.log('Logging : '+res);
+//     const data = await fetch('https://jsonplaceholder.typicode.com/users');
+//     const users = await data.json();
+//     return { props: { users } }
+// }
+
+// export async function getServerSideProps() {
+//     const response = await fetch("http://rvi.17bit.online:31700/api/types?&json_indent=4&bytarget=unf_product_t&title=1")
+//     const data = await response.json()
+//
+//     // if (!product_name) {
+//     //     return {
+//     //
+//     //         },
+//     //     }
+//     // }
+//
+//     return {
+//         props: {
+//             products: data.slice(0, 10),
+//         }
+//     }
+// }
+
 export default InputComplete;
+
+// export async function getServerSideProps(context) {
+//     const response = await fetch(`https://jsonplaceholder.typicode.com`)
+//     const product_name = await response.json()
+//
+//     if (!product_name) {
+//         return {
+//             redirect: {
+//                 destination: '/',
+//                 permanent: false,
+//             },
+//         }
+//     }
+//
+//     return {
+//         props: {
+//             products: product_name,
+//         }
+//     }
+// }

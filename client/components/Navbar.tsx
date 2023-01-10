@@ -19,6 +19,7 @@ import {useState} from "react";
 import {useRouter} from "next/router";
 import {Stack, Button} from "@mui/material";
 import {CalculateOutlined} from "@mui/icons-material";
+import {signIn, signOut, useSession} from "next-auth/react";
 
 
 const Search = styled('div')(({theme}) => ({
@@ -80,6 +81,12 @@ export default function Navbar() {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const router = useRouter()
+
+// Подключаем аутентификацию
+    const { data: session, status } = useSession()
+    const loading = status === 'loading'
+
+
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -221,6 +228,28 @@ export default function Navbar() {
                             >{text}</Button>
                         </Stack>
                     ))}
+                    {!session && (<>
+                        <a href={'/api/auth/signin'}
+                           onClick={(e) => {
+                               e.preventDefault()
+                               signIn()
+                           }}
+                        >
+                            Sign in
+                        </a>
+                    </>
+                        )}
+                    {session?.user && (
+                        <>
+                            <a
+                                href={`/api/auth/signout`}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    signOut()
+                                }}
+                            >
+                                Sign out
+                            </a>
                     <Box sx={{display: {xs: 'none', md: 'flex'}}}>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="error">
@@ -260,6 +289,8 @@ export default function Navbar() {
                             <MoreIcon/>
                         </IconButton>
                     </Box>
+                        </>
+                        )}
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}

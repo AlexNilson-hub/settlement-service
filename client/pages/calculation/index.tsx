@@ -4,9 +4,10 @@ import CalculationTable from "../../components/calculation-tables/CalculationTab
 
 const Calculation = () => {
     return (
+        <>
         <MainLayout>
-            <CalculationTable />
-        </MainLayout>
+            <CalculationTable/>
+        </MainLayout></>
     )
 }
 
